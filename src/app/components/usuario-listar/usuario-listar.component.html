@@ -1,0 +1,104 @@
+<br>
+<div class="col-12">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Alta</th>
+                    <th scope="col">Activado</th>
+                    <th scope="col">Perfil</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let u of usuarios">
+                <tr>
+                    <th scope="row">{{u.id}}</th>
+                    <td>
+                        <p *ngIf="u.rol=='admin';else user">{{u.nombre}} <b>es el admin ;)</b></p>
+                        <ng-template #user>{{u.nombre}} <b>es el user :D</b></ng-template>
+                    </td>
+                    <td>{{u.email}}</td>
+                    <td>{{u.password}}</td>
+                    <td>{{u.rol}}</td>
+                    <td>{{u.alta|date:"dd/MM/yy"}}</td>
+                    <td>
+                        <p *ngIf="u.activado==null">null</p>
+                    </td>
+                    <td>
+                        <p *ngIf="u.perfil==null">null</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- <div class="component" *ngIf="revelar">
+    <div class="col-md-4" *ngFor='let usuario of usuarios'>
+        <p *ngIf="usuario.rol=='admin'; else user">{{usuario.nombre}} <b>es el admin ;)</b></p>
+        <ng-template #user>
+            <p>{{usuario.nombre}} <b>es el user :D</b></p>
+        </ng-template>
+    </div>
+    
+    <ng-template #fila>
+        <tbody>
+            <tr>
+                <td colspan="4">No hay mas filas</td>
+            </tr>
+        </tbody>
+    </ng-template>
+</div> -->
+
+<div class="component">
+    <h4>Prueba con Switch</h4>
+    <div class="col-md-4" *ngFor="let u of usuarios">
+        <div [ngSwitch]="u.rol">
+            <p *ngSwitchCase="rol.admin"> {{u.nombre}} <b>es el admin ;)</b> </p>
+            <p *ngSwitchCase="rol.user"> {{u.nombre}} <b>es el user :D</b> </p>
+
+            <!-- Otra mamera de realizar lo mismo -->
+            <!-- <p *ngSwitchCase="'admin'"> {{u.nombre}} <b>es el admin ;)</b> </p>
+            <p *ngSwitchCase="'user'"> {{u.nombre}} <b>es el user :D</b> </p> -->
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="component" *ngIf="true">
+    <form action="../user/procesar" method="post">
+        <table border="1" class="table">
+            <thead>
+                <th>Accion</th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>password</th>
+            </thead>
+            <tbody *ngIf="usuarios.length > 0; else fila">
+                <tr *ngFor=" let usuario of usuarios">
+                    <td>
+                        <div class="input-group-text">
+                            <input type="checkbox" name="usuario" value="{{usuario.id}}"
+                                aria-label="Checkbox for following text input">
+                        </div>
+                    </td>
+                    <td>{{usuario.id}}</td>
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.password}}</td>
+                </tr>
+            </tbody>
+            <ng-template #fila>
+                <tbody>
+                    <tr>
+                        <td colspan="4">No hay mas filas</td>
+                    </tr>
+                </tbody>
+            </ng-template>
+        </table>
+        <button class="">Enviar</button>
+    </form>
+</div> -->
